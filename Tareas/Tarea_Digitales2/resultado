@@ -1,0 +1,239 @@
+#! /usr/bin/vvp
+:ivl_version "10.3 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 7;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x555a71a73160 .scope module, "BancoPrueba_Mux" "BancoPrueba_Mux" 2 7;
+ .timescale -3 -7;
+v0x555a71acba50_0 .net "clok", 0 0, v0x555a71acb510_0;  1 drivers
+v0x555a71acbb60_0 .net "data_in0", 1 0, v0x555a71acb5b0_0;  1 drivers
+v0x555a71acbc70_0 .net "data_in1", 1 0, v0x555a71acb680_0;  1 drivers
+v0x555a71acbd60_0 .net "data_out", 1 0, v0x555a71acae30_0;  1 drivers
+v0x555a71acbe70_0 .net "reset_L", 0 0, v0x555a71acb850_0;  1 drivers
+v0x555a71acbfb0_0 .net "selector", 0 0, v0x555a71acb940_0;  1 drivers
+S_0x555a71a732e0 .scope module, "Mux_Intanciado_cond" "Mux_Conductual" 2 15, 3 1 0, S_0x555a71a73160;
+ .timescale -3 -7;
+    .port_info 0 /OUTPUT 2 "data_out"
+    .port_info 1 /INPUT 1 "clok"
+    .port_info 2 /INPUT 1 "reset_L"
+    .port_info 3 /INPUT 1 "selector"
+    .port_info 4 /INPUT 2 "data_in0"
+    .port_info 5 /INPUT 2 "data_in1"
+v0x555a71aaa630_0 .net "clok", 0 0, v0x555a71acb510_0;  alias, 1 drivers
+v0x555a71acac90_0 .net "data_in0", 1 0, v0x555a71acb5b0_0;  alias, 1 drivers
+v0x555a71acad70_0 .net "data_in1", 1 0, v0x555a71acb680_0;  alias, 1 drivers
+v0x555a71acae30_0 .var "data_out", 1 0;
+v0x555a71acaf10_0 .net "reset_L", 0 0, v0x555a71acb850_0;  alias, 1 drivers
+v0x555a71acb020_0 .var "salida1", 1 0;
+v0x555a71acb100_0 .net "selector", 0 0, v0x555a71acb940_0;  alias, 1 drivers
+E_0x555a71ab2c90 .event posedge, v0x555a71aaa630_0;
+E_0x555a71ab2da0 .event edge, v0x555a71acb100_0, v0x555a71acad70_0, v0x555a71acac90_0;
+S_0x555a71acb280 .scope module, "probador_Instanciado" "probador_Mux" 2 26, 4 1 0, S_0x555a71a73160;
+ .timescale -3 -7;
+    .port_info 0 /OUTPUT 1 "clok"
+    .port_info 1 /INPUT 2 "data_out"
+    .port_info 2 /OUTPUT 1 "reset_L"
+    .port_info 3 /OUTPUT 1 "selector"
+    .port_info 4 /OUTPUT 2 "data_in0"
+    .port_info 5 /OUTPUT 2 "data_in1"
+v0x555a71acb510_0 .var "clok", 0 0;
+v0x555a71acb5b0_0 .var "data_in0", 1 0;
+v0x555a71acb680_0 .var "data_in1", 1 0;
+v0x555a71acb780_0 .net "data_out", 1 0, v0x555a71acae30_0;  alias, 1 drivers
+v0x555a71acb850_0 .var "reset_L", 0 0;
+v0x555a71acb940_0 .var "selector", 0 0;
+    .scope S_0x555a71a732e0;
+T_0 ;
+    %wait E_0x555a71ab2da0;
+    %load/vec4 v0x555a71acb100_0;
+    %pad/u 32;
+    %cmpi/e 1, 0, 32;
+    %jmp/0xz  T_0.0, 4;
+    %load/vec4 v0x555a71acad70_0;
+    %store/vec4 v0x555a71acb020_0, 0, 2;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x555a71acac90_0;
+    %store/vec4 v0x555a71acb020_0, 0, 2;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x555a71a732e0;
+T_1 ;
+    %wait E_0x555a71ab2c90;
+    %load/vec4 v0x555a71acaf10_0;
+    %pad/u 32;
+    %cmpi/e 1, 0, 32;
+    %jmp/0xz  T_1.0, 4;
+    %load/vec4 v0x555a71acb020_0;
+    %assign/vec4 v0x555a71acae30_0, 0;
+    %jmp T_1.1;
+T_1.0 ;
+    %pushi/vec4 0, 0, 2;
+    %assign/vec4 v0x555a71acae30_0, 0;
+T_1.1 ;
+    %jmp T_1;
+    .thread T_1;
+    .scope S_0x555a71acb280;
+T_2 ;
+    %vpi_call 4 10 "$dumpfile", "Mux.vcd" {0 0 0};
+    %vpi_call 4 11 "$dumpvars" {0 0 0};
+    %vpi_call 4 12 "$display", "\011\011\011clok,\011sMux_cond,\011reset_L, \011selector,\011data_in0,\011data_in1" {0 0 0};
+    %vpi_call 4 13 "$monitor", $time, "\011%b\011%b\011\011%b\011\011%b\011%b\011%b", v0x555a71acb510_0, v0x555a71acb780_0, v0x555a71acb850_0, v0x555a71acb940_0, v0x555a71acb5b0_0, v0x555a71acb680_0 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x555a71acb850_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x555a71acb940_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb5b0_0, 4, 1;
+    %pushi/vec4 0, 0, 1;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb5b0_0, 4, 1;
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v0x555a71acb680_0, 0, 2;
+    %delay 100000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x555a71acb850_0, 0, 1;
+    %delay 40000, 0;
+    %load/vec4 v0x555a71acb5b0_0;
+    %inv;
+    %store/vec4 v0x555a71acb5b0_0, 0, 2;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 0, 2;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 1, 2;
+    %inv;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %delay 40000, 0;
+    %load/vec4 v0x555a71acb940_0;
+    %inv;
+    %store/vec4 v0x555a71acb940_0, 0, 1;
+    %load/vec4 v0x555a71acb5b0_0;
+    %parti/s 1, 0, 2;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb5b0_0, 4, 1;
+    %load/vec4 v0x555a71acb5b0_0;
+    %parti/s 1, 1, 2;
+    %inv;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb5b0_0, 4, 1;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 0, 2;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 1, 2;
+    %inv;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %delay 40000, 0;
+    %load/vec4 v0x555a71acb5b0_0;
+    %parti/s 1, 0, 2;
+    %inv;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb5b0_0, 4, 1;
+    %load/vec4 v0x555a71acb5b0_0;
+    %parti/s 1, 1, 2;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb5b0_0, 4, 1;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 0, 2;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 1, 2;
+    %inv;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %delay 40000, 0;
+    %load/vec4 v0x555a71acb940_0;
+    %inv;
+    %store/vec4 v0x555a71acb940_0, 0, 1;
+    %load/vec4 v0x555a71acb5b0_0;
+    %parti/s 1, 0, 2;
+    %inv;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb5b0_0, 4, 1;
+    %load/vec4 v0x555a71acb5b0_0;
+    %parti/s 1, 1, 2;
+    %inv;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb5b0_0, 4, 1;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 0, 2;
+    %inv;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 1, 2;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %delay 40000, 0;
+    %load/vec4 v0x555a71acb940_0;
+    %inv;
+    %store/vec4 v0x555a71acb940_0, 0, 1;
+    %load/vec4 v0x555a71acb5b0_0;
+    %inv;
+    %store/vec4 v0x555a71acb5b0_0, 0, 2;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 0, 2;
+    %ix/load 4, 0, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %load/vec4 v0x555a71acb680_0;
+    %parti/s 1, 1, 2;
+    %inv;
+    %ix/load 4, 1, 0;
+    %flag_set/imm 4, 0;
+    %store/vec4 v0x555a71acb680_0, 4, 1;
+    %delay 40000, 0;
+    %load/vec4 v0x555a71acb940_0;
+    %inv;
+    %store/vec4 v0x555a71acb940_0, 0, 1;
+    %vpi_call 4 54 "$finish" {0 0 0};
+    %end;
+    .thread T_2;
+    .scope S_0x555a71acb280;
+T_3 ;
+    %pushi/vec4 0, 0, 1;
+    %assign/vec4 v0x555a71acb510_0, 0;
+    %end;
+    .thread T_3;
+    .scope S_0x555a71acb280;
+T_4 ;
+    %delay 20000, 0;
+    %load/vec4 v0x555a71acb510_0;
+    %inv;
+    %assign/vec4 v0x555a71acb510_0, 0;
+    %jmp T_4;
+    .thread T_4;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "BancoPrueba_Mux.v";
+    "./Mux_Conductual.v";
+    "./probador_Mux.v";

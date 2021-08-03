@@ -1,0 +1,147 @@
+$date
+	Mon Aug 31 00:15:26 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ns
+$end
+$scope module BancoPrueba_Mux $end
+$var wire 1 ! selector $end
+$var wire 1 " reset_L $end
+$var wire 2 # data_out [1:0] $end
+$var wire 2 $ data_in1 [1:0] $end
+$var wire 2 % data_in0 [1:0] $end
+$var wire 1 & clok $end
+$scope module Mux_Intanciado_cond $end
+$var wire 1 ! selector $end
+$var wire 1 " reset_L $end
+$var wire 2 ' data_in1 [1:0] $end
+$var wire 2 ( data_in0 [1:0] $end
+$var wire 1 & clok $end
+$var reg 2 ) data_out [1:0] $end
+$var reg 2 * salida1 [1:0] $end
+$upscope $end
+$scope module probador_Instanciado $end
+$var wire 2 + data_out [1:0] $end
+$var reg 1 & clok $end
+$var reg 2 , data_in0 [1:0] $end
+$var reg 2 - data_in1 [1:0] $end
+$var reg 1 " reset_L $end
+$var reg 1 ! selector $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 -
+b0 ,
+bx +
+b0 *
+bx )
+b0 (
+b0 '
+0&
+b0 %
+b0 $
+bx #
+0"
+0!
+$end
+#20000
+b0 #
+b0 )
+b0 +
+1&
+#40000
+0&
+#60000
+1&
+#80000
+0&
+#100000
+1&
+1"
+#120000
+0&
+#140000
+b11 #
+b11 )
+b11 +
+1&
+b11 *
+b10 $
+b10 '
+b10 -
+b11 %
+b11 (
+b11 ,
+#160000
+0&
+#180000
+b0 #
+b0 )
+b0 +
+1&
+b0 *
+b0 $
+b0 '
+b0 -
+b1 %
+b1 (
+b1 ,
+1!
+#200000
+0&
+#220000
+b10 #
+b10 )
+b10 +
+1&
+b10 *
+b10 $
+b10 '
+b10 -
+b0 %
+b0 (
+b0 ,
+#240000
+0&
+#260000
+b11 #
+b11 )
+b11 +
+1&
+b11 *
+b11 $
+b11 '
+b11 -
+b11 %
+b11 (
+b11 ,
+0!
+#280000
+0&
+#300000
+b1 #
+b1 )
+b1 +
+1&
+b1 *
+b1 $
+b1 '
+b1 -
+b0 %
+b0 (
+b0 ,
+1!
+#320000
+0&
+#340000
+b0 #
+b0 )
+b0 +
+1&
+b0 *
+0!

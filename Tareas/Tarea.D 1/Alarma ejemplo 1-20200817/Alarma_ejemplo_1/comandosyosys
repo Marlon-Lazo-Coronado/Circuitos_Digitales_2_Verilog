@@ -1,0 +1,4 @@
+yosys
+read_verilog alarma_desc_conductual.v
+opt
+show
