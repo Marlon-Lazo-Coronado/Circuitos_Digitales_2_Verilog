@@ -1,0 +1,25 @@
+`timescale 	1ns	/ 100ps
+// escala	unidad temporal (valor de "#1") / precisi�n
+
+// includes de archivos de verilog
+// Pueden omitirse y llamarse desde el makefile
+`include "muxUNS_desc_cond.v"
+//`include "muxUNS_desc_estr.v"
+`include "probador.v"
+//`include "cmos_cells.v"
+
+module BancoPruebas; // Testbench
+	// Por lo general, las se�ales en el banco de pruebas son wires.
+	// No almacenan un valor, son manejadas por otras instancias de m�dulos.
+	wire reset,clk,clk2f, valid_in0_estr,valid_in0_cond, valid_in1_estr,valid_in1_cond;
+    wire [31:0] lane0,lane1,data_out_cond, data_out_estr;
+
+	// Descripci�n conductual de alarma
+	muxUNS_desc_cond	muxUNS(/*AUTOINST*/);
+
+
+	
+	// Probador: generador de se�ales y monitor
+	probador 				prob(/*AUTOINST*/);
+
+endmodule
